@@ -82,6 +82,7 @@ namespace DirectCertInstall
                         ProcessStartInfo ps = new ProcessStartInfo();
                         ps.FileName = "CertMgr.Exe";
                         ps.Arguments = "/add -all "+cert.FullName+" -s -r localMachine CA";
+                        ps.UseShellExecute = false;
                         ps.CreateNoWindow=true;
                         crlCert.StartInfo = ps;
                         crlCert.Start();
