@@ -16,6 +16,8 @@ namespace DirectCertInstall
         /// </summary>
         private string incomeDir;
 
+       // X509Certificate2Collection crlCollection = new X509Certificate2Collection();
+
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -81,12 +83,14 @@ namespace DirectCertInstall
                         Process crlCert = new Process();
                         ProcessStartInfo ps = new ProcessStartInfo();
                         ps.FileName = "CertMgr.Exe";
-                        ps.Arguments = "/add -all "+cert.FullName+" -s -r localMachine CA";
+                        ps.Arguments = "/add -all " + cert.FullName + " -s -r localMachine CA";
                         ps.UseShellExecute = false;
-                        ps.CreateNoWindow=true;
+                        ps.CreateNoWindow = true;
                         crlCert.StartInfo = ps;
                         crlCert.Start();
                         crlCert.WaitForExit();
+
+                        //crlCollection.Add(readCRL(cert.FullName));
 
                     }
                 }
@@ -95,5 +99,28 @@ namespace DirectCertInstall
             return certs;
         }
 
+        //не взлетело
+        //private X509Certificate2 readCRL(string path)
+        //{
+        //    X509Certificate2 crlCert = new X509Certificate2();
+        //    if(File.Exists(path))
+        //    {
+        //        using (FileStream crlFile = new FileStream(path, FileMode.Open, FileAccess.Read))
+        //        {
+        //            int size = (int)crlFile.Length;
+        //            byte[] dataCRL = new byte[size];
+
+        //            size = crlFile.Read(dataCRL, 0, size);
+        //            crlFile.Close();
+
+        //            crlCert.Import(dataCRL);
+
+        //        }
+
+        //    }
+
+        //    return crlCert;
+
+        //}
     }
 }
