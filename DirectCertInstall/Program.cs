@@ -9,6 +9,8 @@ namespace DirectCertInstall
     {
         static void Main(string[] args)
         {
+            CertInstaller ci = new CertInstaller(@"c:\temp\certs\");
+            ci.InstallNow();
         }
     }
 }
